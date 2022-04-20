@@ -4,10 +4,10 @@
 
 #include "stdio.h"
 
-#define ALMOST_ZERO 0.0000000001
-
 unsigned int uholnik_roztaty_priamkou_pocet_komponent(
         const float *x, const float *y, unsigned int l, float a, float b, float c) {
+
+    #define ALMOST_ZERO 0.0000000001
 
     int prienik_counter = 0;            // počítadlo, koľko krát prenikne priamka cez okraj uholnika
     unsigned short int last_pos;        // -1 => pod priemkou, 1 => nad priamkov, 0 => na priamke
@@ -17,12 +17,9 @@ unsigned int uholnik_roztaty_priamkou_pocet_komponent(
     float diff = y[l-1] - (float) - (a*x[l-1] + c) / (float) b;
     if (diff > ALMOST_ZERO) {
         last_pos = 1;
-        printf("Poloha -1-veho je nad priamkou\n");
     } else if (diff < - ALMOST_ZERO) {
         last_pos = -1;
-        printf("Poloha -1-veho je pod priamkou\n");
     } else {
-        printf("Poloha -1-veho je na priamke\n");
     }
 
     for (int i = 0; i < l; i++) {
@@ -30,17 +27,13 @@ unsigned int uholnik_roztaty_priamkou_pocet_komponent(
         diff = y[i] - (float) - (a*x[i] + c) / (float) b;
         if (diff > ALMOST_ZERO) {
             new_pos = 1;
-            printf("Poloha %d-teho je nad priamkou\n", i);
         } else if (diff < - ALMOST_ZERO) {
             new_pos = -1;
-            printf("Poloha %d-teho je pod priamkou\n", i);
         } else {
-            printf("Poloha %d-veho je na priamke\n", i);
         }
 
                 // Zisti, či sa zmenila poloha, ak hej, musel byť prienik
         if (new_pos != last_pos && new_pos != 0 && last_pos != 0) {
-            printf("\tMedzi bodom %d a %d je prienik\n", i-1, i);
             prienik_counter++;
         }
         last_pos = new_pos;
