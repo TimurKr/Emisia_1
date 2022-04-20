@@ -18,11 +18,11 @@ unsigned int uholnik_roztaty_priamkou_pocet_komponent(
     if (diff > ALMOST_ZERO) {
         last_pos = 1;
         printf("Poloha -1-veho je nad priamkou\n");
-    } else if (diff < ALMOST_ZERO) {
+    } else if (diff < - ALMOST_ZERO) {
         last_pos = -1;
         printf("Poloha -1-veho je pod priamkou\n");
     } else {
-        return 0;
+        printf("Poloha -1-veho je na priamke\n");
     }
 
     for (int i = 0; i < l; i++) {
@@ -31,30 +31,34 @@ unsigned int uholnik_roztaty_priamkou_pocet_komponent(
         if (diff > ALMOST_ZERO) {
             new_pos = 1;
             printf("Poloha %d-teho je nad priamkou\n", i);
-        } else if (diff < ALMOST_ZERO) {
+        } else if (diff < - ALMOST_ZERO) {
             new_pos = -1;
             printf("Poloha %d-teho je pod priamkou\n", i);
         } else {
-            return 0;
+            printf("Poloha %d-veho je na priamke\n", i);
         }
 
                 // Zisti, či sa zmenila poloha, ak hej, musel byť prienik
-        if (new_pos != last_pos) {
-            printf("Medzi bodom %d a %d je prienik\n", i-1, i);
+        if (new_pos != last_pos && new_pos != 0 && last_pos != 0) {
+            printf("\tMedzi bodom %d a %d je prienik\n", i-1, i);
             prienik_counter++;
         }
         last_pos = new_pos;
     }
-    return prienik_counter;
+
+    // Ak náhodou prvý aj posledný leží na priamke, nájdeme o jeden prienik menej, preto + 1,
+    // to nezmení výsledok celočíselného delenia, následne + 1, lebo jedna časť je už na začiatku a
+    // každé 2 prieseky vytvoria novú
+    return (prienik_counter+1)/2 + 1;
 }
 
 int main(void) {
-    float x[5] = {1,3.4,4.75,4,3};
-    float y[5] = {0.7,1,2.14,3.7,1.7};
+    float x[5] = {3.4,4.75,4,3,1};
+    float y[5] = {1,2.14,3.7,2.1,0.7};
     float a, b, c;
     a = -0.7;
     b = 1;
     c = 0;
     unsigned int n = uholnik_roztaty_priamkou_pocet_komponent(x,y,5,a,b,c);
-    printf("\n\nNašli sme %d prienikov, to znamená, že uholnik bol rozdelený na %d častí.\n\n", n, n/2+1);
+    printf("\n\nUholnik bol rozdelený na %d častí.\n\n", n);
 }
