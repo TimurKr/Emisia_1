@@ -19,7 +19,6 @@ unsigned int uholnik_roztaty_priamkou_pocet_komponent(
         last_pos = 1;
     } else if (diff < - ALMOST_ZERO) {
         last_pos = -1;
-    } else {
     }
 
     for (int i = 0; i < l; i++) {
@@ -29,13 +28,13 @@ unsigned int uholnik_roztaty_priamkou_pocet_komponent(
             new_pos = 1;
         } else if (diff < - ALMOST_ZERO) {
             new_pos = -1;
-        } else {
         }
 
                 // Zisti, či sa zmenila poloha, ak hej, musel byť prienik
         if (new_pos != last_pos && new_pos != 0 && last_pos != 0) {
             prienik_counter++;
         }
+
         last_pos = new_pos;
     }
 
