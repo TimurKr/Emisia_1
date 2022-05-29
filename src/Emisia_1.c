@@ -45,12 +45,12 @@ unsigned int uholnik_roztaty_priamkou_pocet_komponent(
 }
 
 int main(void) {
-    float x[5] = {3.4,4.75,4,3,1};
-    float y[5] = {1,2.14,3.7,2.1,0.7};
+    float x[5] = { 1, 1, 2, 1,-1};
+    float y[5] = { 1,-1, 1, 2, 1};
     float a, b, c;
-    a = -0.7;
+    a = 1;
     b = 1;
-    c = 0;
+    c = 1;
     unsigned int n = uholnik_roztaty_priamkou_pocet_komponent(x,y,5,a,b,c);
     printf("\n\nUholnik bol rozdelený na %d častí.\n\n", n);
 }
