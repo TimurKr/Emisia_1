@@ -2,7 +2,7 @@
 // Created by Timur Kramar on 17/04/2022.
 //
 
-#include "stdio.h"
+#include <stdio.h>
 
 unsigned int uholnik_roztaty_priamkou_pocet_komponent(
         const float *x, const float *y, unsigned int l, float a, float b, float c) {
@@ -50,7 +50,7 @@ int main(void) {
     float a, b, c;
     a = 1;
     b = 1;
-    c = 1;
+    c = -1;
     unsigned int n = uholnik_roztaty_priamkou_pocet_komponent(x,y,5,a,b,c);
     printf("\n\nUholnik bol rozdelený na %d častí.\n\n", n);
 }
