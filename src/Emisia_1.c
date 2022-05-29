@@ -9,12 +9,13 @@ unsigned int uholnik_roztaty_priamkou_pocet_komponent(
 
     #define ALMOST_ZERO 0.0000000001
 
-    int prienik_counter = 0;            // počítadlo, koľko krát prenikne priamka cez okraj uholnika
-    unsigned short int last_pos;        // -1 => pod priemkou, 1 => nad priamkov, 0 => na priamke
+    int prienik_counter = 0;            // počítadlo, koľko krát prenikne priamka cez okraj uholníka
+    unsigned short int last_pos;        // -1 => pod priamkou, 1 => nad priamkou , 0 => na priamke
     unsigned short int new_pos;
 
-            // Zisti polohu posledného bodu ku priamke
-    float diff = y[l-1] - (float) - (a*x[l-1] + c) / (float) b;
+            // Zisti polohu posledného bodu ku priamke,
+            // jedno mínus lebo chceme rozdiel, druhé lebo to je predpis pre y z rovnice 0 = ax+by+c
+    float diff = y[l-1] - (- (a*x[l-1] + c) / (float) b);
     if (diff > ALMOST_ZERO) {
         last_pos = 1;
     } else if (diff < - ALMOST_ZERO) {
@@ -23,7 +24,7 @@ unsigned int uholnik_roztaty_priamkou_pocet_komponent(
 
     for (int i = 0; i < l; i++) {
                 // Zisti polohu i-teho bodu ku priamke
-        diff = y[i] - (float) - (a*x[i] + c) / (float) b;
+        diff = y[i] - (- (a*x[i] + c) / (float) b);
         if (diff > ALMOST_ZERO) {
             new_pos = 1;
         } else if (diff < - ALMOST_ZERO) {
@@ -52,5 +53,5 @@ int main(void) {
     b = 1;
     c = -1;
     unsigned int n = uholnik_roztaty_priamkou_pocet_komponent(x,y,5,a,b,c);
-    printf("\n\nUholnik bol rozdelený na %d častí.\n\n", n);
+    printf("\n\nUholník bol rozdelený na %d častí.\n\n", n);
 }
